@@ -15,6 +15,27 @@ const defaultConfig = {
     scope: "openid email profile offline",
 } satisfies Partial<Config>;
 
+function injectRoutes(params: any, resolve: (path: string) => string) {
+    const routes = [
+        { pattern: "/api/login", entrypoint: "./api/login.ts" },
+        { pattern: "/api/register", entrypoint: "./api/register.ts" },
+        { pattern: "/api/callback", entrypoint: "./api/callback.ts" },
+        { pattern: "/api/signout", entrypoint: "./api/signout.ts" },
+        {
+            pattern: "/api/isAuthenticated",
+            entrypoint: "./api/isAuthenticated.ts",
+        },
+        { pattern: "/api/getUser", entrypoint: "./api/getUser.ts" },
+    ];
+
+    routes.forEach(({ pattern, entrypoint }) => {
+        params.injectRoute({
+            pattern,
+            entrypoint: resolve(entrypoint),
+        });
+    });
+}
+
 export default defineIntegration({
     name: "kinde-integration",
     optionsSchema: z.custom<Partial<Config>>().default({}),
@@ -32,30 +53,7 @@ export default defineIntegration({
                         },
                     });
 
-                    params.injectRoute({
-                        pattern: "/api/login",
-                        entrypoint: resolve("./api/login.ts"),
-                    });
-                    params.injectRoute({
-                        pattern: "/api/register",
-                        entrypoint: resolve("./api/register.ts"),
-                    });
-                    params.injectRoute({
-                        pattern: "/api/callback",
-                        entrypoint: resolve("./api/callback.ts"),
-                    });
-                    params.injectRoute({
-                        pattern: "/api/signout",
-                        entrypoint: resolve("./api/signout.ts"),
-                    });
-                    params.injectRoute({
-                        pattern: "/api/isAuthenticated",
-                        entrypoint: resolve("./api/isAuthenticated.ts"),
-                    });
-                    params.injectRoute({
-                        pattern: "/api/getUser",
-                        entrypoint: resolve("./api/getUser.ts"),
-                    });
+                    injectRoutes(params, resolve);
                 },
             },
         };

@@ -1,8 +1,4 @@
-/**
- * Generates a random state string for OAuth requests.
- * @param length - Length of the string (default 16).
- * @returns Random string.
- */
+// Generates a random state string for OAuth requests.
 export function generateRandomState(length: number = 16): string {
     const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

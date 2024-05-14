@@ -1,13 +1,10 @@
 import { APIRoute } from "astro";
 import { getUserProfile } from "../urls.js";
 import config from "virtual:kinde-integration/config";
+import { getAccessTokenFromCookie, handleError } from "../utils.js";
 
 export const GET: APIRoute = async ({ request }) => {
-    const cookies = request.headers.get("cookie");
-    const accessToken = cookies
-        ?.split("; ")
-        .find((c) => c.startsWith("kinde_access_token="))
-        ?.split("=")[1];
+    const accessToken = getAccessTokenFromCookie(request);
 
     if (!accessToken) {
         return new Response("No access token found", { status: 401 });
@@ -20,6 +17,6 @@ export const GET: APIRoute = async ({ request }) => {
             headers: { "Content-Type": "application/json" },
         });
     } catch (error) {
-        return new Response(error instanceof Error ? error.message : null, { status: 500 });
+        return handleError(error);
     }
 };
