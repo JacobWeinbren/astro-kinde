@@ -70,6 +70,10 @@ export default defineIntegration({
                         pattern: "/api/signout",
                         entrypoint: resolve("./api/signout.ts"),
                     });
+                    params.injectRoute({
+                        pattern: "/api/introspect",
+                        entrypoint: resolve("./api/introspect.ts"),
+                    });
                 },
             },
         };
