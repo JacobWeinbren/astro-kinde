@@ -1,6 +1,4 @@
-# Kinde Astro Integration
-
-This Astro integration provides authentication functionality using Kinde.
+# Kinde Astro Integration Instructions
 
 ## Installation
 
@@ -65,10 +63,10 @@ const isAuthenticated = response.ok;
 ---
 
 {isAuthenticated ? (
-<button onclick="fetch('/api/signout', { method: 'POST' })">Sign Out</button>
-) : (
-<button onclick="fetch('/api/login', { method: 'POST' })">Login</button>
-)}
+	<a href="/api/kinde/signout">Sign Out</a>
+  ) : (
+	<a href="/api/kinde/login">Login</a>
+  )}
 ```
 
 That's it! You now have Kinde authentication set up in your Astro project.
