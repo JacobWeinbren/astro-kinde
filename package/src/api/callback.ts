@@ -1,7 +1,7 @@
 import { APIRoute } from "astro";
 
 // Handles the OAuth callback, storing the authorization code in a cookie
-export const POST: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request }) => {
     const url = new URL(request.url);
     const code = url.searchParams.get("code");
     if (!code) {

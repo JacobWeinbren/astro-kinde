@@ -1,6 +1,7 @@
 import esbuild from "esbuild";
 import { nodeExternalsPlugin } from "esbuild-node-externals";
 import pkg from "./package.json" assert { type: "json" };
+import { copyFileSync } from "fs";
 
 esbuild
     .build({
@@ -18,5 +19,8 @@ esbuild
             "virtual:image-service",
         ],
         plugins: [nodeExternalsPlugin()],
+    })
+    .then(() => {
+        copyFileSync("src/index.d.ts", "dist/index.d.ts");
     })
     .catch(() => process.exit(1));
