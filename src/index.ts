@@ -1,10 +1,10 @@
 import {
     defineIntegration,
     addVirtualImports,
-    addDts,
     createResolver,
 } from "astro-integration-kit";
 import { z } from "zod";
+import type { Config } from "./types.js";
 
 const defaultConfig = {
     clientId: "",
@@ -13,17 +13,11 @@ const defaultConfig = {
     signoutUri: "",
     responseType: "code",
     scope: "openid email profile offline",
-};
+} satisfies Partial<Config>;
 
 export default defineIntegration({
     name: "kinde-integration",
-    optionsSchema: z.object({
-        clientId: z.string(),
-        domain: z.string(),
-        redirectUri: z.string(),
-        responseType: z.string().optional(),
-        scope: z.string().optional(),
-    }),
+    optionsSchema: z.custom<Partial<Config>>().default({}),
     setup({ options, name }) {
         const { resolve } = createResolver(import.meta.url);
         return {
@@ -36,22 +30,6 @@ export default defineIntegration({
                                 { ...defaultConfig, ...options }
                             )}`,
                         },
-                    });
-
-                    addDts(params, {
-                        name: "kinde-integration",
-                        content: `declare module "virtual:kinde-integration/config" {
-                            export interface Config {
-                                clientId: string;
-                                domain: string;
-                                redirectUri: string;
-                                signoutUri: string;
-                                responseType?: string;
-                                scope?: string;
-                            }
-                            const config: Config;
-                            export default config;
-                        }`,
                     });
 
                     params.injectRoute({
