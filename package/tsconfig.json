@@ -1,15 +1,16 @@
 {
     "compilerOptions": {
-        "target": "es2016",
+        "target": "ESNext",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true,
-        "moduleResolution": "nodenext",
-        "module": "NodeNext",
+        "moduleResolution": "Node16",
+        "module": "Node16",
         "allowImportingTsExtensions": true,
         "noEmit": true,
         "typeRoots": ["./node_modules/@types"],
-        "types": []
+        "types": ["node"]
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "exclude": ["dist"]
 }

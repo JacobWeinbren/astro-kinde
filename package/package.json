@@ -1,0 +1,54 @@
+{
+    "name": "astro-kinde",
+    "version": "1.0.0",
+    "description": "Astro integration module for Kinde authentication",
+    "main": "index.js",
+    "author": {
+        "email": "jacobweinbren@gmail.com",
+        "name": "Jacob Weinbren:",
+        "url": "https://kafkaesque.blog:"
+    },
+    "license": "MIT",
+    "keywords": [
+        "astro-integration",
+        "astro-component",
+        "withastro",
+        "astro",
+        "kinde",
+        "authentication",
+        "authorization"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "node build.js --watch",
+        "build": "node build.js"
+    },
+    "type": "module",
+    "dependencies": {
+        "astro-integration-kit": "^0.13.2",
+        "esbuild-node-externals": "^1.13.1"
+    },
+    "peerDependencies": {
+        "astro": "^4.4.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.12.12",
+        "esbuild": "^0.21.2",
+        "typescript": "5.4.5"
+    },
+    "prettier": {
+        "tabWidth": 4
+    }
+}
