@@ -32,12 +32,13 @@ const buildOptions = {
 
 async function build() {
     try {
-        const context = await esbuild.build(buildOptions);
+        const context = await esbuild.context(buildOptions);
         copyFileSync("src/index.d.ts", "dist/index.d.ts");
         if (watch) {
             console.log("Watching for changes...");
             await context.watch();
         } else {
+            await context.rebuild();
             console.log("Build completed.");
             process.exit(0);
         }

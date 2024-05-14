@@ -7,3 +7,12 @@ export function generateRandomState(length: number = 16): string {
         () => characters[Math.floor(Math.random() * characters.length)]
     ).join("");
 }
+
+// Safely decodes a base64 string
+export function safeBase64Decode(base64String: string) {
+    base64String = base64String.replace(/-/g, "+").replace(/_/g, "/");
+    while (base64String.length % 4) {
+        base64String += "=";
+    }
+    return atob(base64String);
+}

@@ -8,13 +8,16 @@ import type { Config } from "./types.js";
 
 const defaultConfig = {
     clientId: "",
+    clientSecret: "",
     domain: "",
-    redirectUri: "",
-    signoutUri: "",
+    callbackUri: "",
+    signedInUri: "",
+    signedOutUri: "",
     responseType: "code",
     scope: "openid email profile offline",
 } satisfies Partial<Config>;
 
+// Injects predefined routes into the application
 function injectRoutes(params: any, resolve: (path: string) => string) {
     const routes = [
         { pattern: "/api/kinde/login", entrypoint: "./api/login.js" },

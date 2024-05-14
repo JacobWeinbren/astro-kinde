@@ -1,8 +1,7 @@
 import { APIRoute } from "astro";
-import { introspectAccessToken } from "../urls.ts";
-import config from "virtual:kinde-integration/config";
-import { getAccessTokenFromCookie, handleError } from "../utils.js";
+import { getAccessTokenFromCookie, handleError, isLoggedIn } from "../utils.js";
 
+// API route to check if the user is authenticated
 export const GET: APIRoute = async ({ request }) => {
     const accessToken = getAccessTokenFromCookie(request);
 
@@ -11,14 +10,14 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     try {
-        const introspectionResult = await introspectAccessToken(
-            accessToken,
-            config
-        );
-        return new Response(JSON.stringify(introspectionResult), {
-            status: 200,
-            headers: { "Content-Type": "application/json" },
-        });
+        if (await isLoggedIn(accessToken)) {
+            return new Response("Authenticated", {
+                status: 200,
+                headers: { "Content-Type": "application/json" },
+            });
+        } else {
+            return new Response(accessToken, { status: 401 });
+        }
     } catch (error) {
         return handleError(error);
     }

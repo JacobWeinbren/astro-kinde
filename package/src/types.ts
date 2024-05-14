@@ -1,6 +1,8 @@
 export interface Config {
     clientId: string;
-    redirectUri: string;
+    callbackUri: string;
+    signedInUri: string;
+    signedOutUri: string;
     responseType: string;
     scope: string;
     state?: string;

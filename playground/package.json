@@ -11,10 +11,11 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"kinde-astro": "file:../package",
 		"@astrojs/tailwind": "^5.1.0",
 		"astro": "^4.8.3",
 		"astro-integration-kit": "^0.13.2",
+		"dotenv": "^16.4.5",
+		"kinde-astro": "file:../package",
 		"tailwindcss": "^3.4.3"
 	},
 	"devDependencies": {

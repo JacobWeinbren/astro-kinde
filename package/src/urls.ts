@@ -3,11 +3,11 @@ import type { Config } from "./types.js";
 
 // Generates an authorization URL with provided configuration
 export function createAuthUrl(config: Config): string {
-    config.state = config.state || generateRandomState();
+    config.state = generateRandomState();
     const baseUrl = `${config.domain}/oauth2/auth`;
     const urlParams = new URLSearchParams({
         client_id: config.clientId,
-        redirect_uri: config.redirectUri,
+        redirect_uri: config.callbackUri,
         response_type: config.responseType,
         scope: config.scope,
         state: config.state,
@@ -21,11 +21,17 @@ export async function makeOAuthRequest(
     params: URLSearchParams,
     method: string = "POST"
 ): Promise<any> {
-    const response = await fetch(url, {
+    const options: RequestInit = {
         method,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params,
-    });
+    };
+
+    // Only include the body for methods that support it
+    if (method !== "GET" && method !== "HEAD") {
+        options.body = params;
+    }
+
+    const response = await fetch(url, options);
     if (!response.ok) {
         throw new Error(
             `HTTP error ${response.status}: ${response.statusText}`
@@ -44,7 +50,7 @@ export async function getAccessToken(
         grant_type: "authorization_code",
         client_id: config.clientId,
         code,
-        redirect_uri: config.redirectUri,
+        redirect_uri: config.callbackUri,
     };
     if (config.clientSecret) {
         paramsData.client_secret = config.clientSecret;
