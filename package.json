@@ -1,0 +1,13 @@
+{
+    "type": "module",
+    "dependencies": {
+        "astro-integration-kit": "^0.13.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.12.12",
+        "typescript": "^5.4.5"
+    },
+    "prettier": {
+        "tabWidth": 4
+    }
+}
