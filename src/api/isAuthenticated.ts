@@ -23,6 +23,8 @@ export const GET: APIRoute = async ({ request }) => {
             headers: { "Content-Type": "application/json" },
         });
     } catch (error) {
-        return new Response(error.message, { status: 500 });
+        return new Response(error instanceof Error ? error.message : null, {
+            status: 500,
+        });
     }
 };

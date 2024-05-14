@@ -1,18 +1,8 @@
 import { generateRandomState } from "./crypto.js";
-
-export interface AuthConfig {
-    clientId: string;
-    redirectUri: string;
-    responseType: string;
-    scope: string;
-    state?: string;
-    domain: string;
-    clientSecret?: string;
-    [key: string]: any;
-}
+import type { Config } from "./types.js";
 
 // Generates an authorization URL with provided configuration
-export function createAuthUrl(config: AuthConfig): string {
+export function createAuthUrl(config: Config): string {
     config.state = config.state || generateRandomState();
     const baseUrl = `${config.domain}/oauth2/auth`;
     const urlParams = new URLSearchParams({
@@ -47,7 +37,7 @@ export async function makeOAuthRequest(
 // Retrieves an access token using an authorization code
 export async function getAccessToken(
     code: string,
-    config: AuthConfig
+    config: Config
 ): Promise<string> {
     const tokenUrl = `${config.domain}/oauth2/token`;
     const paramsData: Record<string, string> = {
@@ -67,7 +57,7 @@ export async function getAccessToken(
 // Fetches user profile using an access token
 export async function getUserProfile(
     accessToken: string,
-    config: AuthConfig
+    config: Config
 ): Promise<any> {
     const userInfoUrl = `${config.domain}/oauth2/v2/user_profile`;
     const response = await fetch(userInfoUrl, {
@@ -77,7 +67,7 @@ export async function getUserProfile(
 }
 
 // Creates a logout URL
-export function createLogoutUrl(config: AuthConfig, returnTo: string): string {
+export function createLogoutUrl(config: Config, returnTo: string): string {
     const logoutUrl = `${config.domain}/logout`;
     const urlParams = new URLSearchParams({
         client_id: config.clientId,
@@ -87,7 +77,7 @@ export function createLogoutUrl(config: AuthConfig, returnTo: string): string {
 }
 
 // Fetches JWKS from the domain
-export async function fetchJwks(config: AuthConfig): Promise<any> {
+export async function fetchJwks(config: Config): Promise<any> {
     const jwksUrl = `${config.domain}/.well-known/jwks.json`;
     return makeOAuthRequest(jwksUrl, new URLSearchParams(), "GET");
 }
@@ -95,7 +85,7 @@ export async function fetchJwks(config: AuthConfig): Promise<any> {
 // Introspects an access token to check its validity
 export async function introspectAccessToken(
     accessToken: string,
-    config: AuthConfig
+    config: Config
 ): Promise<any> {
     const introspectUrl = `${config.domain}/oauth2/introspect`;
     const params = new URLSearchParams({
