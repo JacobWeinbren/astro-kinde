@@ -8,6 +8,7 @@ const watch = process.argv.includes("--watch");
 const buildOptions = {
     entryPoints: [
         "src/index.ts",
+        "src/authMiddleware.ts",
         "src/api/login.ts",
         "src/api/register.ts",
         "src/api/callback.ts",
