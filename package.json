@@ -1,4 +1,11 @@
 {
+    "name": "astro-kinde",
+    "version": "1.0.0",
+    "description": "Astro integration module for Kinde authentication",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc"
+    },
     "type": "module",
     "dependencies": {
         "astro-integration-kit": "^0.13.2"

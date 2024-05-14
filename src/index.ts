@@ -9,6 +9,11 @@ interface KindeConfig {
     scope?: string;
 }
 
+/**
+ * Creates a Kinde integration with the provided configuration.
+ * @param config - The Kinde configuration.
+ * @returns The integration object.
+ */
 export default function createKindeIntegration(config: KindeConfig) {
     const fullConfig = {
         ...config,
@@ -19,7 +24,6 @@ export default function createKindeIntegration(config: KindeConfig) {
     return defineIntegration({
         name: "kinde-integration",
         setup() {
-            const authUrl = createAuthUrl(fullConfig);
             return {
                 hooks: {},
             };
