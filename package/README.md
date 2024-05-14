@@ -27,8 +27,8 @@ Configure the integration by passing options to the `kinde` function in `astro.c
 
 ```js
 kinde({
-    clientId: "YOUR_CLIENT_ID",
-    domain: "YOUR_DOMAIN",
+    clientId: import.meta.env.PUBLIC_YOUR_CLIENT_ID,
+    domain: import.meta.env.PUBLIC_YOUR_KINDE_DOMAIAN,
     redirectUri: import.meta.env.DEV
         ? "http://localhost:3000/api/auth/callback"
         : "https://yourdomain.com/api/auth/callback",
@@ -47,12 +47,12 @@ Make sure to set the `redirectUri` and `signoutUri` based on your `NODE_ENV` to 
 
 The integration automatically injects the following routes:
 
--   `/api/auth/login`: Redirects to the Kinde login page
--   `/api/auth/register`: Redirects to the Kinde registration page
--   `/api/auth/callback`: Handles the OAuth callback
--   `/api/auth/signout`: Handles user sign-out
--   `/api/auth/isAuthenticated`: Checks if the user is authenticated
--   `/api/auth/getUser`: Retrieves the authenticated user's profile
+-   `/api/kinde/login`: Redirects to the Kinde login page
+-   `/api/kinde/register`: Redirects to the Kinde registration page
+-   `/api/kinde/callback`: Handles the OAuth callback
+-   `/api/kinde/signout`: Handles user sign-out
+-   `/api/kinde/isAuthenticated`: Checks if the user is authenticated
+-   `/api/kinde/getUser`: Retrieves the authenticated user's profile
 
 You can use these routes in your Astro pages to handle authentication.
 

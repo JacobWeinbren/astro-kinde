@@ -3,15 +3,21 @@ import { createResolver } from "astro-integration-kit";
 import { hmrIntegration } from "astro-integration-kit/dev";
 import { defineConfig } from "astro/config";
 
-const { default: packageName } = await import("package-name");
+import kinde from "kinde-astro";
 
-// https://astro.build/config
 export default defineConfig({
 	integrations: [
 		tailwind(),
-		packageName(),
+		kinde({
+			clientId: import.meta.env.PUBLIC_KINDE_CLIENT_ID,
+			domain: import.meta.env.PUBLIC_KINDE_DOMAIN,
+			redirectUri: "http://localhost:3000/api/auth/callback",
+			signoutUri: "http://localhost:3000",
+		}),
 		hmrIntegration({
-			directory: createResolver(import.meta.url).resolve("../package/dist"),
+			directory: createResolver(import.meta.url).resolve(
+				"../package/dist"
+			),
 		}),
 	],
 });

@@ -17,15 +17,15 @@ const defaultConfig = {
 
 function injectRoutes(params: any, resolve: (path: string) => string) {
     const routes = [
-        { pattern: "/api/auth/login", entrypoint: "./api/login.ts" },
-        { pattern: "/api/auth/register", entrypoint: "./api/register.ts" },
-        { pattern: "/api/auth/callback", entrypoint: "./api/callback.ts" },
-        { pattern: "/api/auth/signout", entrypoint: "./api/signout.ts" },
+        { pattern: "/api/kinde/login", entrypoint: "./api/login.ts" },
+        { pattern: "/api/kinde/register", entrypoint: "./api/register.ts" },
+        { pattern: "/api/kinde/callback", entrypoint: "./api/callback.ts" },
+        { pattern: "/api/kinde/signout", entrypoint: "./api/signout.ts" },
         {
-            pattern: "/api/auth/isAuthenticated",
+            pattern: "/api/kinde/isAuthenticated",
             entrypoint: "./api/isAuthenticated.ts",
         },
-        { pattern: "/api/auth/getUser", entrypoint: "./api/getUser.ts" },
+        { pattern: "/api/kinde/getUser", entrypoint: "./api/getUser.ts" },
     ];
 
     routes.forEach(({ pattern, entrypoint }) => {
