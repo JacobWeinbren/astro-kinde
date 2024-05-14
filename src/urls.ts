@@ -1,11 +1,17 @@
 import { generateRandomState } from "./crypto.js";
-import { AuthConfig } from "./types.ts";
 
-/**
- * Creates an authorization URL with the provided configuration.
- * @param config - The authentication configuration.
- * @returns The authorization URL.
- */
+export interface AuthConfig {
+    clientId: string;
+    redirectUri: string;
+    responseType: string;
+    scope: string;
+    state?: string;
+    domain: string;
+    clientSecret?: string;
+    [key: string]: any;
+}
+
+// Generates an authorization URL with provided configuration
 export function createAuthUrl(config: AuthConfig): string {
     config.state = config.state || generateRandomState();
     const baseUrl = `${config.domain}/oauth2/auth`;
@@ -16,17 +22,10 @@ export function createAuthUrl(config: AuthConfig): string {
         scope: config.scope,
         state: config.state,
     });
-
     return `${baseUrl}?${urlParams.toString()}`;
 }
 
-/**
- * Makes an OAuth request to the specified URL with the given parameters.
- * @param url - The URL to make the request to.
- * @param params - The URL parameters.
- * @param method - The HTTP method to use (default is "POST").
- * @returns A promise that resolves to the response data.
- */
+// Makes an OAuth request and returns the response data
 export async function makeOAuthRequest(
     url: string,
     params: URLSearchParams,
@@ -37,22 +36,15 @@ export async function makeOAuthRequest(
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: params,
     });
-
     if (!response.ok) {
         throw new Error(
             `HTTP error ${response.status}: ${response.statusText}`
         );
     }
-
     return await response.json();
 }
 
-/**
- * Retrieves an access token using the provided authorization code.
- * @param code - The authorization code.
- * @param config - The authentication configuration.
- * @returns A promise that resolves to the access token.
- */
+// Retrieves an access token using an authorization code
 export async function getAccessToken(
     code: string,
     config: AuthConfig
@@ -72,12 +64,7 @@ export async function getAccessToken(
     return data.access_token;
 }
 
-/**
- * Fetches the user's profile using the access token.
- * @param accessToken - The access token.
- * @param config - The authentication configuration.
- * @returns A promise that resolves to the user's profile.
- */
+// Fetches user profile using an access token
 export async function getUserProfile(
     accessToken: string,
     config: AuthConfig
@@ -89,12 +76,7 @@ export async function getUserProfile(
     return await response.json();
 }
 
-/**
- * Creates a logout URL with the provided configuration and return URL.
- * @param config - The authentication configuration.
- * @param returnTo - The URL to return to after logout.
- * @returns The logout URL.
- */
+// Creates a logout URL
 export function createLogoutUrl(config: AuthConfig, returnTo: string): string {
     const logoutUrl = `${config.domain}/logout`;
     const urlParams = new URLSearchParams({
@@ -104,22 +86,13 @@ export function createLogoutUrl(config: AuthConfig, returnTo: string): string {
     return `${logoutUrl}?${urlParams.toString()}`;
 }
 
-/**
- * Fetches the JSON Web Key Set (JWKS) from the specified domain.
- * @param config - The authentication configuration.
- * @returns A promise that resolves to the JWKS.
- */
+// Fetches JWKS from the domain
 export async function fetchJwks(config: AuthConfig): Promise<any> {
     const jwksUrl = `${config.domain}/.well-known/jwks.json`;
     return makeOAuthRequest(jwksUrl, new URLSearchParams(), "GET");
 }
 
-/**
- * Introspects the access token to check its validity.
- * @param accessToken - The access token to introspect.
- * @param config - The authentication configuration.
- * @returns A promise that resolves to the introspection response.
- */
+// Introspects an access token to check its validity
 export async function introspectAccessToken(
     accessToken: string,
     config: AuthConfig
