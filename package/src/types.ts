@@ -7,6 +7,6 @@ export interface Config {
     scope: string;
     state?: string;
     domain: string;
-    clientSecret?: string;
+    clientSecret: string;
     [key: string]: any;
 }

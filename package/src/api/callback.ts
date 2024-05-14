@@ -12,7 +12,7 @@ export const GET: APIRoute = async ({ request, redirect }) => {
     const tokenEndpoint = `${config.domain}/oauth2/token`;
     const body = new URLSearchParams({
         client_id: config.clientId,
-        client_secret: config.clientSecret ?? "",
+        client_secret: config.clientSecret,
         code,
         grant_type: "authorization_code",
         redirect_uri: config.callbackUri,

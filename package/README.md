@@ -24,22 +24,21 @@ export default defineConfig({
 Configure the integration by passing options to the `kinde` function in `astro.config.mjs`:
 
 ```js
+import dotenv from "dotenv";
+
+dotenv.config();
+
 kinde({
-    clientId: import.meta.env.PUBLIC_YOUR_CLIENT_ID,
-    domain: import.meta.env.PUBLIC_YOUR_KINDE_DOMAIAN,
-    redirectUri: import.meta.env.DEV
-        ? "http://localhost:3000/api/auth/callback"
-        : "https://yourdomain.com/api/auth/callback",
-    signoutUri: import.meta.env.DEV
-        ? "http://localhost:3000"
-        : "https://yourdomain.com",
-    // Optional:
-    // responseType: 'code',
-    // scope: 'openid email profile offline',
+    clientId: process.env.PUBLIC_KINDE_CLIENT_ID,
+    clientSecret: process.env.PUBLIC_KINDE_CLIENT_SECRET,
+    domain: process.env.PUBLIC_KINDE_DOMAIN,
+    callbackUri: "http://localhost:4321/api/kinde/callback",
+    signedInUri: "http://localhost:4321",
+    signedOutUri: "http://localhost:4321",
 });
 ```
 
-Make sure to set the `redirectUri` and `signoutUri` based on your `NODE_ENV` to handle development and production environments.
+You can set the uris based on your `NODE_ENV` to handle development and production environments.
 
 ## Usage
 
@@ -58,7 +57,7 @@ Example usage in an Astro page:
 
 ```astro
 ---
-const response = await fetch('/api/isAuthenticated');
+const response = await fetch(`${Astro.url.origin}/api/kinde/isAuthenticated`);
 const isAuthenticated = response.ok;
 ---
 
