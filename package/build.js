@@ -3,24 +3,38 @@ import { nodeExternalsPlugin } from "esbuild-node-externals";
 import pkg from "./package.json" assert { type: "json" };
 import { copyFileSync } from "fs";
 
-esbuild
-    .build({
-        entryPoints: ["src/index.ts"],
-        bundle: true,
-        platform: "node",
-        target: "esnext",
-        outfile: "dist/index.js",
-        sourcemap: true,
-        minify: true,
-        format: "esm",
-        external: [
-            ...Object.keys(pkg.peerDependencies),
-            "virtual:kinde-integration/config",
-            "virtual:image-service",
-        ],
-        plugins: [nodeExternalsPlugin()],
-    })
-    .then(() => {
+const watch = process.argv.includes("--watch");
+
+const buildOptions = {
+    entryPoints: ["src/index.ts"],
+    bundle: true,
+    platform: "node",
+    target: "esnext",
+    outfile: "dist/index.js",
+    sourcemap: true,
+    minify: true,
+    format: "esm",
+    external: [
+        ...Object.keys(pkg.peerDependencies),
+        "virtual:kinde-integration/config",
+        "virtual:image-service",
+    ],
+    plugins: [nodeExternalsPlugin()],
+};
+
+async function build() {
+    try {
+        const context = await esbuild.context(buildOptions);
+        await context.rebuild();
         copyFileSync("src/index.d.ts", "dist/index.d.ts");
-    })
-    .catch(() => process.exit(1));
+        if (watch) {
+            console.log("Watching for changes...");
+            await context.watch();
+        }
+    } catch (error) {
+        console.error("Build failed:", error);
+        process.exit(1);
+    }
+}
+
+build();

@@ -6,6 +6,7 @@ import { defineConfig } from "astro/config";
 import kinde from "kinde-astro";
 
 export default defineConfig({
+	output: "server",
 	integrations: [
 		tailwind(),
 		kinde({

@@ -1,5 +1,6 @@
 ---
 const response = await fetch(`${Astro.url.origin}/api/kinde/isAuthenticated`);
+console.log(response);
 const isAuthenticated = response.ok;
 ---
 
