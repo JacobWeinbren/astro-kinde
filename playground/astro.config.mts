@@ -11,7 +11,7 @@ export default defineConfig({
 		kinde({
 			clientId: import.meta.env.PUBLIC_KINDE_CLIENT_ID,
 			domain: import.meta.env.PUBLIC_KINDE_DOMAIN,
-			redirectUri: "http://localhost:3000/api/auth/callback",
+			redirectUri: "http://localhost:3000/api/kinde/callback",
 			signoutUri: "http://localhost:3000",
 		}),
 		hmrIntegration({
