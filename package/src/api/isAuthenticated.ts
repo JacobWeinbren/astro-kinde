@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ request }) => {
                 headers: { "Content-Type": "application/json" },
             });
         } else {
-            return new Response(accessToken, { status: 401 });
+            return new Response("Not Authenticated", { status: 401 });
         }
     } catch (error) {
         return handleError(error);
