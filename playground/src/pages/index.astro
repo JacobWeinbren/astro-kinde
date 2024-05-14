@@ -1,5 +1,12 @@
 ---
-const response = await fetch(`${Astro.url.origin}/api/kinde/isAuthenticated`);
+const { request } = Astro;
+const cookies = request.headers.get('cookie');
+
+const response = await fetch(`${Astro.url.origin}/api/kinde/isAuthenticated`, {
+    headers: {
+        cookie: cookies || ''
+    }
+});
 const isAuthenticated = response.ok;
 ---
 

@@ -4,7 +4,7 @@ import {
     createResolver,
 } from "astro-integration-kit";
 import { z } from "zod";
-import type { Config } from "./types.js";
+import type { Config } from "./types.ts";
 
 const defaultConfig = {
     clientId: "",
@@ -46,17 +46,23 @@ export default defineIntegration({
         const { resolve } = createResolver(import.meta.url);
         return {
             hooks: {
-                "astro:config:setup": (params) => {
-                    addVirtualImports(params, {
-                        name,
-                        imports: {
-                            "virtual:kinde-integration/config": `export default ${JSON.stringify(
-                                { ...defaultConfig, ...options }
-                            )}`,
-                        },
-                    });
-
+                "astro:config:setup": ({ addMiddleware, ...params }) => {
+                    addVirtualImports(
+                        { addMiddleware, ...params },
+                        {
+                            name,
+                            imports: {
+                                "virtual:kinde-integration/config": `export default ${JSON.stringify(
+                                    { ...defaultConfig, ...options }
+                                )}`,
+                            },
+                        }
+                    );
                     injectRoutes(params, resolve);
+                    addMiddleware({
+                        entrypoint: resolve("./authMiddleware.js"),
+                        order: "pre",
+                    });
                 },
             },
         };
