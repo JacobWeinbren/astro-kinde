@@ -1,5 +1,5 @@
 import { APIRoute } from "astro";
-import { introspectAccessToken } from "../urls.js";
+import { getUserProfile } from "../urls.js";
 import config from "virtual:kinde-integration/config";
 
 export const GET: APIRoute = async ({ request }) => {
@@ -14,11 +14,8 @@ export const GET: APIRoute = async ({ request }) => {
     }
 
     try {
-        const introspectionResult = await introspectAccessToken(
-            accessToken,
-            config
-        );
-        return new Response(JSON.stringify(introspectionResult), {
+        const userProfile = await getUserProfile(accessToken, config);
+        return new Response(JSON.stringify(userProfile), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
