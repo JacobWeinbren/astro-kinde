@@ -6,11 +6,19 @@ import { copyFileSync } from "fs";
 const watch = process.argv.includes("--watch");
 
 const buildOptions = {
-    entryPoints: ["src/index.ts"],
+    entryPoints: [
+        "src/index.ts",
+        "src/api/login.ts",
+        "src/api/register.ts",
+        "src/api/callback.ts",
+        "src/api/signout.ts",
+        "src/api/isAuthenticated.ts",
+        "src/api/getUser.ts",
+    ],
     bundle: true,
     platform: "node",
     target: "esnext",
-    outfile: "dist/index.js",
+    outdir: "dist",
     sourcemap: true,
     minify: true,
     format: "esm",
