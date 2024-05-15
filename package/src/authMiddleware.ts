@@ -4,8 +4,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const { request, locals } = context;
     const url = new URL(request.url);
 
-    // Skip middleware for specific API route
-    if (url.pathname === "/api/kinde/isAuthenticated") {
+    // Skip middleware for any path starting with /api/kinde
+    if (url.pathname.startsWith("/api/kinde/")) {
         return next();
     }
 

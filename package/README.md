@@ -65,18 +65,29 @@ The integration automatically injects the following routes:
 
 You can use these routes in your Astro pages to handle authentication.
 
-Example usage in an Astro page:
+Usage in an Astro page:
 
 ```astro
 ---
-const isAuthenticated = Astro.local.isAuthenticated;
+const isAuthenticated = Astro.locals.isAuthenticated;
 ---
 
 {isAuthenticated ? (
 	<a href="/api/kinde/signout">Sign Out</a>
   ) : (
 	<a href="/api/kinde/login">Login</a>
+  <a href="/api/kinde/register">Register</a>
   )}
+```
+
+Additional example using fetch to retrieve user profile:
+
+```astro
+---
+  const response = await fetch(`${Astro.url.origin}/api/kinde/getUser`);
+  const userProfile = await response.json();
+  console.log(userProfile);
+---
 ```
 
 That's it! You now have Kinde authentication set up in your Astro project.
