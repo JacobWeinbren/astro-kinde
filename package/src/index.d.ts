@@ -1,6 +1,6 @@
 import { Config } from "./types";
 
-declare module "kinde-astro" {
+declare module "astro-kinde" {
     export function defineIntegration(config: any): any;
     export function addVirtualImports(params: any, options: any): void;
     export function createResolver(url: string): {

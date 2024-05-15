@@ -3,7 +3,7 @@ import {
     addVirtualImports,
     createResolver,
 } from "astro-integration-kit";
-import { z } from "zod";
+import { z } from "astro/zod";
 import type { Config } from "./types.ts";
 
 const defaultConfig = {

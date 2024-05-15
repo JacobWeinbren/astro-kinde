@@ -2,9 +2,9 @@ import tailwind from "@astrojs/tailwind";
 import { createResolver } from "astro-integration-kit";
 import { hmrIntegration } from "astro-integration-kit/dev";
 import { defineConfig } from "astro/config";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 
-import { kinde } from "kinde-astro";
+import kinde from "astro-kinde";
 
 dotenv.config();
 

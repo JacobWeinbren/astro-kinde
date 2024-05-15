@@ -1,4 +1,4 @@
-import { APIRoute } from "astro";
+import { type APIRoute } from "astro";
 import { getAccessTokenFromCookie, handleError, isLoggedIn } from "../utils.js";
 
 // API route to check if the user is authenticated
