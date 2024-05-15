@@ -38,7 +38,6 @@
     "type": "module",
     "dependencies": {
         "astro-integration-kit": "^0.13.2",
-        "esbuild-node-externals": "^1.13.1"
     },
     "peerDependencies": {
         "astro": "^4.8.3"
