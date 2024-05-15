@@ -1,4 +1,4 @@
-# Kinde Astro Integration
+# Astro Kinde Integration
 
 This package provides an Astro integration for Kinde, an authentication and user management platform. It simplifies the process of adding authentication to your Astro application using Kinde's OAuth 2.0 flow.
 
@@ -7,14 +7,14 @@ This package provides an Astro integration for Kinde, an authentication and user
 1. Install the package:
 
 ```bash
-npm install kinde-astro
+npm install astro-kinde
 ```
 
 2. Add the integration to your `astro.config.mjs`:
 
 ```ts
 import { defineConfig } from "astro/config";
-import kinde from "kinde-astro";
+import kinde from "astro-kinde";
 
 export default defineConfig({
     integrations: [kinde()],
@@ -67,7 +67,7 @@ The integration automatically injects the following routes:
 
 You can use these routes in your Astro pages to handle authentication.
 
-Usage in an Astro page:
+Authenticating Astro Pages is simple:
 
 ```astro
 ---
@@ -82,11 +82,11 @@ const isAuthenticated = Astro.locals.isAuthenticated;
 )}
 ```
 
-Additional example using fetch to retrieve user profile:
+Retrieving a user profile:
 
 ```astro
 ---
-  import { getUserData } from 'kinde-astro';
+  import { getUserData } from 'astro-kinde';
   let userData = await getUserData(Astro);
 ---
 ```
