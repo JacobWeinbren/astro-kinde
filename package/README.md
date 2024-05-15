@@ -68,7 +68,7 @@ You can use these routes in your Astro pages to handle authentication.
 Example usage in an Astro page:
 
 ```astro
----;
+---
 const isAuthenticated = Astro.local.isAuthenticated;
 ---
 
