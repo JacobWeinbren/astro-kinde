@@ -68,9 +68,8 @@ You can use these routes in your Astro pages to handle authentication.
 Example usage in an Astro page:
 
 ```astro
----
-const response = await fetch(`${Astro.url.origin}/api/kinde/isAuthenticated`);
-const isAuthenticated = response.ok;
+---;
+const isAuthenticated = Astro.local.isAuthenticated;
 ---
 
 {isAuthenticated ? (
