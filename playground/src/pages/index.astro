@@ -1,4 +1,10 @@
 ---
+import { getUserData } from 'kinde-astro';
+
+let userData = await getUserData(Astro);
+
+console.log(userData);
+
 const isAuthenticated = Astro.locals.isAuthenticated;
 ---
 

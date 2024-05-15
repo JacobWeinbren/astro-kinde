@@ -68,3 +68,5 @@ export default defineIntegration({
         };
     },
 });
+
+export { getUserData } from "./getUserData.ts";

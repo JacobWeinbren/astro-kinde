@@ -74,19 +74,18 @@ const isAuthenticated = Astro.locals.isAuthenticated;
 
 {isAuthenticated ? (
 	<a href="/api/kinde/signout">Sign Out</a>
-  ) : (
+) : (
 	<a href="/api/kinde/login">Login</a>
   <a href="/api/kinde/register">Register</a>
-  )}
+)}
 ```
 
 Additional example using fetch to retrieve user profile:
 
 ```astro
 ---
-  const response = await fetch(`${Astro.url.origin}/api/kinde/getUser`);
-  const userProfile = await response.json();
-  console.log(userProfile);
+  import { getUserData } from 'kinde-astro';
+  let userData = await getUserData(Astro);
 ---
 ```
 
