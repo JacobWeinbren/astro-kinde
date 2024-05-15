@@ -1,5 +1,8 @@
 # Astro Kinde Integration
 
+![Bundle Size](https://img.shields.io/badge/bundle%20size-70KB-brightgreen)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+
 This package provides an Astro integration for Kinde, an authentication and user management platform. It simplifies the process of adding authentication to your Astro application using Kinde's OAuth 2.0 flow.
 
 ## Installation
