@@ -1,4 +1,6 @@
-# Kinde Astro Integration Instructions
+# Kinde Astro Integration
+
+This package provides an Astro integration for Kinde, an authentication and user management platform. It simplifies the process of adding authentication to your Astro application using Kinde's OAuth 2.0 flow.
 
 ## Installation
 
