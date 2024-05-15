@@ -39,7 +39,7 @@ function injectRoutes(params: any, resolve: (path: string) => string) {
     });
 }
 
-export default defineIntegration({
+const kinde = defineIntegration({
     name: "kinde-integration",
     optionsSchema: z.custom<Partial<Config>>().default({}),
     setup({ options, name }) {
@@ -69,4 +69,5 @@ export default defineIntegration({
     },
 });
 
+export default kinde;
 export { getUserData } from "./getUserData.ts";
