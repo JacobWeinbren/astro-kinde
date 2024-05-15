@@ -1,10 +1,10 @@
 ---
 const isAuthenticated = Astro.locals.isAuthenticated;
-   console.log("isAuthenticated:", isAuthenticated); // Add this l
 ---
 
 {isAuthenticated ? (
 	<a href="/api/kinde/signout">Sign Out</a>
   ) : (
 	<a href="/api/kinde/login">Login</a>
+  <a href="/api/kinde/register">Register</a>
   )}

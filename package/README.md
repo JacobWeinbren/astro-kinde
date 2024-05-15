@@ -19,6 +19,18 @@ export default defineConfig({
 });
 ```
 
+3. Setup your env.d.ts
+
+```ts
+/// <reference types="astro/client" />
+
+declare namespace App {
+    interface Locals {
+        isAuthenticated: boolean;
+    }
+}
+```
+
 ## Configuration
 
 Configure the integration by passing options to the `kinde` function in `astro.config.mjs`:

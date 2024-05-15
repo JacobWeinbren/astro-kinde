@@ -7,6 +7,8 @@ import config from "virtual:kinde-integration/config";
 export const GET: APIRoute = async ({ request, redirect }) => {
     const returnTo = config.signedOutUri;
     const logoutUrl = createLogoutUrl(config, returnTo);
-    deleteAccessTokenCookie(request);
-    return redirect(logoutUrl);
+    const headers = new Headers();
+    deleteAccessTokenCookie(headers);
+    headers.set("Location", logoutUrl);
+    return new Response(null, { headers: headers, status: 302 });
 };

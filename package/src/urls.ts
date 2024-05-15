@@ -5,13 +5,32 @@ import type { Config } from "./types.js";
 export function createAuthUrl(config: Config): string {
     config.state = generateRandomState();
     const baseUrl = `${config.domain}/oauth2/auth`;
-    const urlParams = new URLSearchParams({
+
+    // Base parameters
+    const baseParams = {
         client_id: config.clientId,
         redirect_uri: config.callbackUri,
         response_type: config.responseType,
         scope: config.scope,
         state: config.state,
+    };
+
+    // Remove known base keys from config to avoid duplication
+    const {
+        clientId,
+        callbackUri,
+        responseType,
+        scope,
+        state,
+        ...additionalParams
+    } = config;
+
+    // Merge base parameters with additional parameters
+    const urlParams = new URLSearchParams({
+        ...baseParams,
+        ...additionalParams,
     });
+
     return `${baseUrl}?${urlParams.toString()}`;
 }
 
@@ -76,8 +95,7 @@ export async function getUserProfile(
 export function createLogoutUrl(config: Config, returnTo: string): string {
     const logoutUrl = `${config.domain}/logout`;
     const urlParams = new URLSearchParams({
-        client_id: config.clientId,
-        return_to: returnTo,
+        redirect: returnTo,
     });
     return `${logoutUrl}?${urlParams.toString()}`;
 }

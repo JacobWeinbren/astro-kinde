@@ -5,8 +5,6 @@ import { getAccessTokenFromCookie, handleError, isLoggedIn } from "../utils.js";
 export const GET: APIRoute = async ({ request }) => {
     const accessToken = getAccessTokenFromCookie(request);
 
-    console.log(request.headers);
-
     if (!accessToken) {
         return new Response("No access token found", { status: 401 });
     }

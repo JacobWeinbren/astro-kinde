@@ -32,8 +32,8 @@
         "dist"
     ],
     "scripts": {
-        "dev": "node build.js --watch",
-        "build": "node build.js"
+        "build": "tsup",
+        "watch": "tsup --watch"
     },
     "type": "module",
     "dependencies": {
@@ -41,11 +41,12 @@
         "esbuild-node-externals": "^1.13.1"
     },
     "peerDependencies": {
-        "astro": "^4.4.1"
+        "astro": "^4.8.3"
     },
     "devDependencies": {
         "@types/node": "^20.12.12",
         "esbuild": "^0.21.2",
+        "tsup": "^8.0.2",
         "typescript": "5.4.5"
     },
     "prettier": {

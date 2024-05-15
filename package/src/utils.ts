@@ -11,17 +11,12 @@ export function getAccessTokenFromCookie(request: Request): string | undefined {
         ?.split("=")[1];
 }
 
-export function deleteAccessTokenCookie(request: Request): Response {
-    // Create a new Response object to modify headers
-    const newHeaders = new Headers();
-    newHeaders.append(
+export function deleteAccessTokenCookie(headers: Headers): Headers {
+    headers.append(
         "Set-Cookie",
         "kinde_access_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly"
     );
-
-    return new Response(null, {
-        headers: newHeaders,
-    });
+    return headers;
 }
 
 // A common error handler
@@ -50,7 +45,6 @@ export const isLoggedIn = async (
     if (!accessToken) return false;
 
     const tokenParts = accessToken.split(".");
-    console.log(tokenParts);
     if (tokenParts.length !== 3) {
         return false;
     }

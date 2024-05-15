@@ -1,26 +1,23 @@
-import type { MiddlewareHandler } from "astro";
+import { defineMiddleware } from "astro/middleware";
 
-export const authMiddleware: MiddlewareHandler = async (
-    { request, locals },
-    next
-) => {
+export const onRequest = defineMiddleware(async (context, next) => {
+    const { request, locals } = context;
+    const url = new URL(request.url);
+
+    // Skip middleware for specific API route
+    if (url.pathname === "/api/kinde/isAuthenticated") {
+        return next();
+    }
+
     const cookies = request.headers.get("cookie");
-    const response = await fetch(
-        `${new URL(request.url).origin}/api/kinde/isAuthenticated`,
-        {
-            headers: {
-                cookie: cookies || "",
-            },
-        }
-    );
+    const response = await fetch(`${url.origin}/api/kinde/isAuthenticated`, {
+        headers: {
+            cookie: cookies || "",
+        },
+    });
 
     const isAuthenticated = response.ok;
 
-    if (!isAuthenticated) {
-        return new Response("Unauthorized", { status: 401 });
-    }
-
-    // @ts-ignore
     locals.isAuthenticated = isAuthenticated as boolean;
     return next();
-};
+});
