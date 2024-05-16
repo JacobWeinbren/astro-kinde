@@ -50,7 +50,11 @@ export const isLoggedIn = async (
     }
 
     try {
-        const header = JSON.parse(safeBase64Decode(tokenParts[0]));
+        const tokenHeader = tokenParts[0];
+        if (!tokenHeader) {
+            throw new Error("Token header is missing");
+        }
+        const header = JSON.parse(safeBase64Decode(tokenHeader));
 
         const signingKey = await getSigningKey(header.kid);
         const publicKey = await crypto.subtle.importKey(
@@ -65,7 +69,7 @@ export const isLoggedIn = async (
             "RSASSA-PKCS1-v1_5",
             publicKey,
             new Uint8Array(
-                Array.from(safeBase64Decode(tokenParts[2]), (c) =>
+                Array.from(safeBase64Decode(tokenParts[2] ?? ""), (c) =>
                     c.charCodeAt(0)
                 )
             ),
