@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.0
+
+### Minor Changes
+
+- Adds accessToken to locals storage for SDK management use.
+
 ## 2.0.0
 
 ### Major Changes
