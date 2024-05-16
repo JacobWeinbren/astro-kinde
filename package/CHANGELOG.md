@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.2
+
+### Patch Changes
+
+- Reworked README
+
 ## 2.1.1
 
 ### Patch Changes
