@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.5
+
+### Patch Changes
+
+- Fixed typing for kinde
+
 ## 2.1.4
 
 ### Patch Changes

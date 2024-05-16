@@ -1,6 +1,6 @@
 {
     "name": "astro-kinde",
-    "version": "2.1.4",
+    "version": "2.1.5",
     "description": "Astro integration module for Kinde authentication",
     "main": "index.js",
     "type": "module",

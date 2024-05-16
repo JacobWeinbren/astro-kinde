@@ -12,5 +12,5 @@ declare module "astro-kinde" {
         resolve: (path: string) => string
     ): void;
     export function getUserData(params: any): any;
-    export function kinde(config: Partial<Config>): any;
+    export default function kinde(config: Partial<Config>): any;
 }
