@@ -17,7 +17,9 @@ const defaultConfig = {
     scope: "openid email profile offline",
 } satisfies Partial<Config>;
 
-/* Injects predefined routes into the application */
+/**
+ * Injects predefined routes into the application
+ */
 function injectRoutes(params: any, resolve: (path: string) => string) {
     // Define all routes with their respective patterns and entrypoints
     const routes = [
@@ -41,7 +43,9 @@ function injectRoutes(params: any, resolve: (path: string) => string) {
     });
 }
 
-/*  Define the Kinde integration with Astro */
+/**
+ * Define the Kinde integration with Astro
+ */
 const kinde = defineIntegration({
     name: "kinde-integration",
     optionsSchema: z.custom<Partial<Config>>().default({}),

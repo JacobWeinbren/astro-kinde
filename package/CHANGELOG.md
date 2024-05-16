@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.7
+
+### Patch Changes
+
+- Improved commenting
+
 ## 2.1.6
 
 ### Patch Changes

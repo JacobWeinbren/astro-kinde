@@ -18,7 +18,7 @@ async function introspectToken(token: string) {
         token_type_hint: "access_token",
     }).toString();
 
-    // Perform the POST request to the introspection endpoint with the necessary headers and body
+    // Perform the POST request to the introspection endpoint
     const response = await fetch(`${config.domain}/oauth2/introspect`, {
         method: "POST",
         headers: {

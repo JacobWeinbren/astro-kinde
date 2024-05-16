@@ -2,7 +2,9 @@ import { safeBase64Decode } from "./crypto.ts";
 import { fetchJwks } from "./urls.ts";
 import config from "virtual:kinde-integration/config";
 
-/* Retrieves the access token from the "kinde_access_token" cookie */
+/**
+ * Retrieves the access token from the "kinde_access_token" cookie
+ */
 export function getAccessTokenFromCookie(request: Request): string | undefined {
     const cookies = request.headers.get("cookie");
     return cookies
@@ -11,7 +13,9 @@ export function getAccessTokenFromCookie(request: Request): string | undefined {
         ?.split("=")[1];
 }
 
-/* Deletes the access token cookie by setting its expiry date in the past */
+/**
+ * Deletes the access token cookie by setting its expiry date in the past
+ */
 export function deleteAccessTokenCookie(headers: Headers): Headers {
     headers.append(
         "Set-Cookie",
@@ -20,7 +24,9 @@ export function deleteAccessTokenCookie(headers: Headers): Headers {
     return headers;
 }
 
-/* Sets the access token cookie with HttpOnly and a Max-Age attribute */
+/**
+ * Sets the access token cookie with HttpOnly and a Max-Age attribute
+ */
 export function setAccessTokenCookie(
     headers: Headers,
     accessToken: string,
@@ -33,14 +39,18 @@ export function setAccessTokenCookie(
     return headers;
 }
 
-/* Common error handler that returns a 500 response with the error message */
+/**
+ * Common error handler that returns a 500 response with the error message
+ */
 export function handleError(error: unknown): Response {
     return new Response(error instanceof Error ? error.message : null, {
         status: 500,
     });
 }
 
-/* Retrieves the signing key from JWKS using the key ID (kid) */
+/**
+ * Retrieves the signing key from JWKS using the key ID (kid)
+ */
 async function getSigningKey(kid: string) {
     const jwks = await fetchJwks(config);
     // Find the signing key that matches the provided kid
@@ -53,7 +63,9 @@ async function getSigningKey(kid: string) {
     return signingKey;
 }
 
-/* Validates the access token by verifying its signature and structure */
+/**
+ * Validates the access token by verifying its signature and structure
+ */
 export const verifyToken = async (
     accessToken: string | null
 ): Promise<boolean> => {

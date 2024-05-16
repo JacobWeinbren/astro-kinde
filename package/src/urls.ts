@@ -77,12 +77,8 @@ export async function getAccessToken(
         client_id: config.clientId,
         code,
         redirect_uri: config.callbackUri,
+        client_secret: config.clientSecret,
     };
-
-    // Include client secret if available
-    if (config.clientSecret) {
-        paramsData.client_secret = config.clientSecret;
-    }
 
     const params = new URLSearchParams(paramsData);
     const data = await makeOAuthRequest(tokenUrl, params);
