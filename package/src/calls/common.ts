@@ -7,7 +7,7 @@ export async function kindeApiRequest(
     options?: RequestInit
 ) {
     const url = `${config.domain}${path}`;
-    const accessToken = Astro.cookies.get("kinde_access_token");
+    const accessToken = Astro.cookies.get("kinde_access_token")?.value ?? "";
 
     const response = await fetch(url, {
         ...options,
