@@ -13,7 +13,7 @@ This package provides an Astro integration for Kinde, simplifying the process of
 
 ## Installation
 
-1. Create a [Kinde back-end web account](https://app.kinde.com/register) and set the following environment variables:
+1. Create a [Kinde back-end web account](https://kinde.com/) and set the following environment variables:
 
 ```bash
 KINDE_MANAGEMENT_CLIENT_ID=your_management_client_id
@@ -83,7 +83,7 @@ The integration automatically injects the following routes:
 -   `/api/kinde/isAuthenticated`: Checks if the user is authenticated
 -   `/api/kinde/getUser`: Retrieves the authenticated user's profile
 
-You can use these routes in your Astro pages to handle authentication.
+You can use these routes in your Astro pages to handle authentication. The main ones you will need are login/register/signout.
 
 Authenticating Astro Pages is simple:
 
