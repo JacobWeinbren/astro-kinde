@@ -38,8 +38,8 @@ async function getSigningKey(kid: string) {
     return signingKey;
 }
 
-// Checks if the user is logged in by validating the access token
-export const isLoggedIn = async (
+// Validates the access token
+export const verifyToken = async (
     accessToken: string | null
 ): Promise<boolean> => {
     if (!accessToken) return false;

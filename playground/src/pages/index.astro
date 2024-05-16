@@ -1,14 +1,5 @@
 ---
-import { getTokenDetails, getUserProfile, revokeToken } from 'astro-kinde/calls';
-
 const isAuthenticated = Astro.locals.isAuthenticated;
-
-let revoke = await revokeToken(Astro, Astro.cookies.get("kinde_access_token")?.value || "")
-console.log(revoke);
-let tokenDetails = await getTokenDetails(Astro, Astro.cookies.get("kinde_access_token")?.value || "", "Bearer");
-console.log(tokenDetails);
-let userProfile = await getUserProfile(Astro);
-console.log(userProfile);
 ---
 
 {isAuthenticated ? (
