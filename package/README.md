@@ -7,6 +7,14 @@ This package provides an Astro integration for Kinde, an authentication and user
 
 ## Installation
 
+(0.) Create a Kinde back-end web account. Set the env variables:
+
+```bash
+KINDE_MANAGEMENT_CLIENT_ID=your_management_client_id
+KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
+KINDE_DOMAIN=your_kinde_domain
+```
+
 1. Install the package:
 
 ```bash
@@ -39,7 +47,7 @@ declare namespace App {
 
 ## Configuration
 
-Configure the integration by passing options to the `kinde` function in `astro.config.mjs`. Remember to use a back-end web account:
+Configure the integration by passing options to the `kinde` function in `astro.config.mjs`.
 
 ```js
 import dotenv from "dotenv";
@@ -100,21 +108,15 @@ const isAuthenticated = Astro.locals.isAuthenticated;
 Kinde provides a Management SDK that you can use to manage your users and applications.
 To use the Management SDK:
 
+(0.) If using seperately - remember to store the env variables from the previous steps.
+
 1. Install the SDK:
 
 ```bash
 npm install @kinde-oss/kinde-management-api-js
 ```
 
-2. Store your Management API credentials in `.env`. You can use the same ones you used previously:
-
-```bash
-KINDE_MANAGEMENT_CLIENT_ID=your_management_client_id
-KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
-KINDE_DOMAIN=your_kinde_domain
-```
-
-3. Initialise the SDK in `astro.config.mts`:
+2. Initialise the SDK in `astro.config.mts`:
 
 ```ts
 import { init } from "@kinde/management-api-js";
@@ -123,7 +125,7 @@ import { init } from "@kinde/management-api-js";
 init();
 ```
 
-4. Use the SDK in your Astro pages:
+3. Use the SDK in your Astro pages:
 
 ```astro
 ---
