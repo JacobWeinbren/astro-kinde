@@ -32,6 +32,7 @@ export default defineConfig({
 declare namespace App {
     interface Locals {
         isAuthenticated: boolean;
+        accessToken: string | undefined;
     }
 }
 ```
@@ -46,9 +47,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 kinde({
-    clientId: process.env.PUBLIC_KINDE_CLIENT_ID,
-    clientSecret: process.env.PUBLIC_KINDE_CLIENT_SECRET,
-    domain: process.env.PUBLIC_KINDE_DOMAIN,
+    clientId: process.env.KINDE_MANAGEMENT_CLIENT_ID,
+    clientSecret: process.env.KINDE_MANAGEMENT_CLIENT_SECRET,
+    domain: process.env.KINDE_DOMAIN,
     callbackUri: "http://localhost:4321/api/kinde/callback",
     signedInUri: "http://localhost:4321",
     signedOutUri: "http://localhost:4321",
@@ -102,4 +103,49 @@ const accessToken = Astro.cookies.get("kinde_access_token");
 
 That's it! You now have Kinde authentication set up in your Astro project.
 
-Kinde also provide a [Management SDK](https://github.com/kinde-oss/kinde-management-api-js) that you can use to manage your users and applications.
+## Management SDK
+
+Kinde provides a Management SDK that you can use to manage your users and applications.
+To use the Management SDK:
+
+1. Install the SDK:
+
+```bash
+npm install @kinde-oss/kinde-management-api-js
+```
+
+2. Store your Management API credentials in `.env`:
+
+```bash
+KINDE_MANAGEMENT_CLIENT_ID=your_management_client_id
+KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
+KINDE_DOMAIN=your_kinde_domain
+```
+
+3. Initialize the SDK in `astro.config.mts`:
+
+```ts
+import { init } from "@kinde/management-api-js";
+
+// Run the Kinde initialization
+init();
+```
+
+4. Use the SDK in your Astro pages:
+
+```astro
+---
+import { Oauth, OpenAPI } from "@kinde/management-api-js";
+
+const isAuthenticated = Astro.locals.isAuthenticated;
+const accessToken = Astro.locals.accessToken;
+
+if (isAuthenticated) {
+  OpenAPI.TOKEN = accessToken;
+  const userProfile = await Oauth.getUserProfileV2();
+  console.log(userProfile);
+}
+---
+```
+
+That's it! You now have Kinde authentication set up in your Astro project and can use the Management SDK to manage your users and applications.

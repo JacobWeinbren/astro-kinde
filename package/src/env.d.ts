@@ -9,5 +9,6 @@ declare module "virtual:kinde-integration/config" {
 declare namespace App {
     interface Locals {
         isAuthenticated: boolean;
+        accessToken: string | undefined;
     }
 }

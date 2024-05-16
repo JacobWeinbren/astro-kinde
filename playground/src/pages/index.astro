@@ -1,6 +1,14 @@
 ---
+import { Oauth, OpenAPI } from "@kinde/management-api-js";
+
 const isAuthenticated = Astro.locals.isAuthenticated;
-const accessToken = Astro.cookies.get("kinde_access_token"); 
+const accessToken = Astro.locals.accessToken;
+
+if (isAuthenticated) {
+  OpenAPI.TOKEN = accessToken;
+  const userProfile = await Oauth.getUserProfileV2();
+  console.log(userProfile);
+}
 ---
 
 {isAuthenticated ? (
