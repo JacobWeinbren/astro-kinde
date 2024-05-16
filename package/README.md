@@ -94,13 +94,12 @@ const isAuthenticated = Astro.locals.isAuthenticated;
 )}
 ```
 
-Retrieving a user profile:
+You can also get the access token easily
 
-```astro
----
-  import { getUserData } from 'astro-kinde';
-  let userData = await getUserData(Astro);
----
+```ts
+const accessToken = Astro.cookies.get("kinde_access_token");
 ```
 
 That's it! You now have Kinde authentication set up in your Astro project.
+
+Kinde also provide a [Management SDK](https://github.com/kinde-oss/kinde-management-api-js) that you can use to manage your users and applications.

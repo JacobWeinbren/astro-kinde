@@ -1,5 +1,6 @@
 ---
 const isAuthenticated = Astro.locals.isAuthenticated;
+const accessToken = Astro.cookies.get("kinde_access_token"); 
 ---
 
 {isAuthenticated ? (

@@ -3,10 +3,14 @@ import { createResolver } from "astro-integration-kit";
 import { hmrIntegration } from "astro-integration-kit/dev";
 import { defineConfig } from "astro/config";
 import * as dotenv from "dotenv";
+import { initializeKinde } from "./src/kindeClient";
 
 import kinde from "astro-kinde";
 
 dotenv.config();
+
+// Run the Kinde initialization
+initializeKinde();
 
 export default defineConfig({
 	output: "server",
