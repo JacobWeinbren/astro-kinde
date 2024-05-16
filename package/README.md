@@ -140,3 +140,16 @@ if (isAuthenticated) {
 ```
 
 That's it! You now have Kinde authentication set up in your Astro project and can use the Management SDK to manage your users and applications.
+
+## Contributing
+
+If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Submit a pull request.
+
+## License
+
+By contributing to Astro-Kinde, you agree that your contributions will be licensed under its MIT License.

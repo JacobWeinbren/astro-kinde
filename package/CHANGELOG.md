@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.4
+
+### Patch Changes
+
+- Added Contributing guidelines
+
 ## 2.1.3
 
 ### Patch Changes
