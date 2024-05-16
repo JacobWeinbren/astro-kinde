@@ -12,7 +12,7 @@ import config from "virtual:kinde-integration/config";
 async function introspectToken(token: string) {
     // Prepare the authentication and body for the introspection request
     const credentials = `${config.clientId}:${config.clientSecret}`;
-    const basicAuth = `Basic ${Buffer.from(credentials).toString("base64")}`;
+    const basicAuth = `Basic ${btoa(credentials)}`;
     const body = new URLSearchParams({
         token,
         token_type_hint: "access_token",

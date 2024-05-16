@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.2.0
+
+### Minor Changes
+
+- Replaces Buffer for BTOA
+
 ## 2.1.9
 
 ### Patch Changes
