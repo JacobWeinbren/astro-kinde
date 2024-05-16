@@ -1,1 +1,1 @@
-export { getUserData } from "./calls/oauth.ts";
+export * from "./calls/oauth.ts";
