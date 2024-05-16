@@ -8,14 +8,13 @@ export default defineConfig((options) => {
     return {
         entry: [
             "src/index.ts",
+            "src/calls.ts",
             "src/authMiddleware.ts",
-            "src/getUserData.ts",
             "src/api/login.ts",
             "src/api/register.ts",
             "src/api/callback.ts",
             "src/api/signout.ts",
             "src/api/isAuthenticated.ts",
-            "src/api/getUser.ts",
         ],
         outDir: "dist",
         format: ["esm"],
@@ -24,12 +23,12 @@ export default defineConfig((options) => {
         clean: true,
         dts: true,
         splitting: false,
-        target: 'node18',
+        target: "node18",
         watch: process.argv.includes("--watch"),
         external: [
             ...Object.keys(peerDependencies),
             "virtual:kinde-integration/config",
             "virtual:image-service",
         ],
-    }
+    };
 });

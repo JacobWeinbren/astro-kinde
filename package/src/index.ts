@@ -70,4 +70,3 @@ const kinde = defineIntegration({
 });
 
 export default kinde;
-export { getUserData } from "./getUserData.ts";

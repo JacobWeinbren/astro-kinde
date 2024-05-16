@@ -25,8 +25,12 @@
     "sideEffects": false,
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./calls": {
+            "import": "./dist/calls.js",
+            "types": "./dist/calls.d.ts"
         }
     },
     "files": [
