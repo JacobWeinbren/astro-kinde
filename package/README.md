@@ -122,12 +122,12 @@ KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
 KINDE_DOMAIN=your_kinde_domain
 ```
 
-3. Initialize the SDK in `astro.config.mts`:
+3. Initialise the SDK in `astro.config.mts`:
 
 ```ts
 import { init } from "@kinde/management-api-js";
 
-// Run the Kinde initialization
+// Run the Kinde initialisation
 init();
 ```
 
