@@ -95,14 +95,6 @@ const isAuthenticated = Astro.locals.isAuthenticated;
 )}
 ```
 
-You can also get the access token easily
-
-```ts
-const accessToken = Astro.cookies.get("kinde_access_token");
-```
-
-That's it! You now have Kinde authentication set up in your Astro project.
-
 ## Management SDK
 
 Kinde provides a Management SDK that you can use to manage your users and applications.
