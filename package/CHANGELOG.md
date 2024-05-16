@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.1
+
+### Patch Changes
+
+- Updated the `README.md` with useful clarifications for new users.
+
 ## 2.1.0
 
 ### Minor Changes
