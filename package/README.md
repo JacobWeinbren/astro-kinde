@@ -39,7 +39,7 @@ declare namespace App {
 
 ## Configuration
 
-Configure the integration by passing options to the `kinde` function in `astro.config.mjs`:
+Configure the integration by passing options to the `kinde` function in `astro.config.mjs`. Remember to use a back-end web account:
 
 ```js
 import dotenv from "dotenv";
@@ -106,7 +106,7 @@ To use the Management SDK:
 npm install @kinde-oss/kinde-management-api-js
 ```
 
-2. Store your Management API credentials in `.env`:
+2. Store your Management API credentials in `.env`. You can use the same ones you used previously:
 
 ```bash
 KINDE_MANAGEMENT_CLIENT_ID=your_management_client_id
