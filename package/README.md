@@ -58,9 +58,9 @@ kinde({
 
 | Option       | Description                                  | Example Value                              |
 | ------------ | -------------------------------------------- | ------------------------------------------ |
-| clientId     | The client ID for your Kinde application     | process.env.PUBLIC_KINDE_CLIENT_ID         |
-| clientSecret | The client secret for your Kinde application | process.env.PUBLIC_KINDE_CLIENT_SECRET     |
-| domain       | The domain for your Kinde application        | process.env.PUBLIC_KINDE_DOMAIN            |
+| clientId     | The client ID for your Kinde application     | process.env.KINDE_MANAGEMENT_CLIENT_ID     |
+| clientSecret | The client secret for your Kinde application | process.env.KINDE_MANAGEMENT_CLIENT_SECRET |
+| domain       | The domain for your Kinde application        | process.env.KINDE_DOMAIN                   |
 | callbackUri  | The URI to redirect to after authentication  | "http://localhost:4321/api/kinde/callback" |
 | signedInUri  | The URI to redirect to after signing in      | "http://localhost:4321"                    |
 | signedOutUri | The URI to redirect to after signing out     | "http://localhost:4321"                    |
