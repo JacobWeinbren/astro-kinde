@@ -6,6 +6,7 @@ declare module "virtual:kinde-integration/config" {
     export default config;
 }
 
+// Configuration for Astro storage
 declare namespace App {
     interface Locals {
         isAuthenticated: boolean;

@@ -17,8 +17,9 @@ const defaultConfig = {
     scope: "openid email profile offline",
 } satisfies Partial<Config>;
 
-// Injects predefined routes into the application
+/* Injects predefined routes into the application */
 function injectRoutes(params: any, resolve: (path: string) => string) {
+    // Define all routes with their respective patterns and entrypoints
     const routes = [
         { pattern: "/api/kinde/login", entrypoint: "./api/login.js" },
         { pattern: "/api/kinde/register", entrypoint: "./api/register.js" },
@@ -31,6 +32,7 @@ function injectRoutes(params: any, resolve: (path: string) => string) {
         { pattern: "/api/kinde/getUser", entrypoint: "./api/getUser.js" },
     ];
 
+    // Loop through each route and inject it into the application
     routes.forEach(({ pattern, entrypoint }) => {
         params.injectRoute({
             pattern,
@@ -39,14 +41,19 @@ function injectRoutes(params: any, resolve: (path: string) => string) {
     });
 }
 
+/*  Define the Kinde integration with Astro */
 const kinde = defineIntegration({
     name: "kinde-integration",
     optionsSchema: z.custom<Partial<Config>>().default({}),
     setup({ options, name }) {
+        // Create a resolver based on the current module URL
         const { resolve } = createResolver(import.meta.url);
+
         return {
             hooks: {
+                // Setup configuration and middleware during the Astro config phase
                 "astro:config:setup": ({ addMiddleware, ...params }) => {
+                    // Add virtual imports for configuration merging
                     addVirtualImports(
                         { addMiddleware, ...params },
                         {
@@ -58,7 +65,11 @@ const kinde = defineIntegration({
                             },
                         }
                     );
+
+                    // Inject predefined routes into the application
                     injectRoutes(params, resolve);
+
+                    // Add authentication middleware to the application
                     addMiddleware({
                         entrypoint: resolve("./authMiddleware.js"),
                         order: "pre",

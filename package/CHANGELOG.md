@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.6
+
+### Patch Changes
+
+- Added explanatory commments
+
 ## 2.1.5
 
 ### Patch Changes

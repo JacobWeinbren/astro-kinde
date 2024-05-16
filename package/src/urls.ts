@@ -1,12 +1,15 @@
 import { generateRandomState } from "./crypto.js";
 import type { Config } from "./types.js";
 
-// Generates an authorization URL with provided configuration
+/**
+ * Generates an authorization URL with provided configuration.
+ */
 export function createAuthUrl(config: Config): string {
+    // Generate a unique state for each authorization request
     config.state = generateRandomState();
     const baseUrl = `${config.domain}/oauth2/auth`;
 
-    // Base parameters
+    // Define base parameters for the authorization URL
     const baseParams = {
         client_id: config.clientId,
         redirect_uri: config.callbackUri,
@@ -15,7 +18,7 @@ export function createAuthUrl(config: Config): string {
         state: config.state,
     };
 
-    // Remove known base keys from config to avoid duplication
+    // Extract additional parameters from config, avoiding duplication
     const {
         clientId,
         callbackUri,
@@ -25,7 +28,7 @@ export function createAuthUrl(config: Config): string {
         ...additionalParams
     } = config;
 
-    // Merge base parameters with additional parameters
+    // Combine base parameters with any additional parameters
     const urlParams = new URLSearchParams({
         ...baseParams,
         ...additionalParams,
@@ -34,7 +37,9 @@ export function createAuthUrl(config: Config): string {
     return `${baseUrl}?${urlParams.toString()}`;
 }
 
-// Makes an OAuth request and returns the response data
+/**
+ * Makes an OAuth request and returns the response data.
+ */
 export async function makeOAuthRequest(
     url: string,
     params: URLSearchParams,
@@ -45,7 +50,7 @@ export async function makeOAuthRequest(
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
     };
 
-    // Only include the body for methods that support it
+    // Include the body for methods that support it
     if (method !== "GET" && method !== "HEAD") {
         options.body = params;
     }
@@ -59,7 +64,9 @@ export async function makeOAuthRequest(
     return await response.json();
 }
 
-// Retrieves an access token using an authorization code
+/**
+ * Retrieves an access token using an authorization code.
+ */
 export async function getAccessToken(
     code: string,
     config: Config
@@ -71,15 +78,20 @@ export async function getAccessToken(
         code,
         redirect_uri: config.callbackUri,
     };
+
+    // Include client secret if available
     if (config.clientSecret) {
         paramsData.client_secret = config.clientSecret;
     }
+
     const params = new URLSearchParams(paramsData);
     const data = await makeOAuthRequest(tokenUrl, params);
     return data.access_token;
 }
 
-// Fetches user profile using an access token
+/**
+ * Fetches user profile using an access token.
+ */
 export async function getUserProfile(
     accessToken: string,
     config: Config
@@ -91,7 +103,9 @@ export async function getUserProfile(
     return await response.json();
 }
 
-// Creates a logout URL
+/**
+ * Creates a logout URL with a return URL.
+ */
 export function createLogoutUrl(config: Config, returnTo: string): string {
     const logoutUrl = `${config.domain}/logout`;
     const urlParams = new URLSearchParams({
@@ -100,13 +114,17 @@ export function createLogoutUrl(config: Config, returnTo: string): string {
     return `${logoutUrl}?${urlParams.toString()}`;
 }
 
-// Fetches JWKS from the domain
+/**
+ * Fetches JWKS from the domain.
+ */
 export async function fetchJwks(config: Config): Promise<any> {
     const jwksUrl = `${config.domain}/.well-known/jwks.json`;
     return makeOAuthRequest(jwksUrl, new URLSearchParams(), "GET");
 }
 
-// Introspects an access token to check its validity
+/**
+ * Introspects an access token to check its validity.
+ */
 export async function introspectAccessToken(
     accessToken: string,
     config: Config
@@ -116,8 +134,11 @@ export async function introspectAccessToken(
         token: accessToken,
         client_id: config.clientId,
     });
+
+    // Append client secret if available
     if (config.clientSecret) {
         params.append("client_secret", config.clientSecret);
     }
+
     return makeOAuthRequest(introspectUrl, params);
 }
