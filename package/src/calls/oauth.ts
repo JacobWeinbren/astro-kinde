@@ -8,10 +8,15 @@ export async function getTokenDetails(
     tokenType: string = "Bearer"
 ) {
     const body = createBody({ token, token_type: tokenType });
-    return kindeApiRequest(Astro, "/oauth2/introspect", {
-        method: "POST",
-        body: body,
-    });
+    return kindeApiRequest(
+        Astro,
+        "/oauth2/introspect",
+        {
+            method: "POST",
+            body: body,
+        },
+        "application/x-www-form-urlencoded"
+    );
 }
 
 export async function revokeToken(Astro: AstroGlobal, token: string) {
@@ -20,12 +25,22 @@ export async function revokeToken(Astro: AstroGlobal, token: string) {
         client_id: config.clientId,
         client_secret: config.clientSecret,
     });
-    return kindeApiRequest(Astro, "/oauth2/revoke", {
-        method: "POST",
-        body: body,
-    });
+    return kindeApiRequest(
+        Astro,
+        "/oauth2/revoke",
+        {
+            method: "POST",
+            body: body,
+        },
+        "application/x-www-form-urlencoded"
+    );
 }
 
 export async function getUserProfile(Astro: AstroGlobal) {
-    return kindeApiRequest(Astro, "/oauth2/v2/user_profile");
+    return kindeApiRequest(
+        Astro,
+        "/oauth2/v2/user_profile",
+        {},
+        "application/json"
+    );
 }
