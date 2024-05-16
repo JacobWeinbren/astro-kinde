@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.1.8
+
+### Patch Changes
+
+- Fixed typo
+
 ## 2.1.7
 
 ### Patch Changes
