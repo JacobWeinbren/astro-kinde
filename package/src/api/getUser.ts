@@ -1,4 +1,4 @@
-import { APIRoute } from "astro";
+import { type APIRoute } from "astro";
 import { getUserProfile } from "../urls.js";
 import config from "virtual:kinde-integration/config";
 import { getAccessTokenFromCookie, handleError } from "../utils.js";

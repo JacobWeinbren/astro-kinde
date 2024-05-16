@@ -1,4 +1,5 @@
 {
+    "extends": "astro/tsconfigs/strictest",
     "compilerOptions": {
         "target": "ESNext",
         "esModuleInterop": true,
@@ -7,9 +8,7 @@
         "moduleResolution": "Node16",
         "module": "Node16",
         "allowImportingTsExtensions": true,
-        "noEmit": true,
-        "typeRoots": ["./node_modules/@types"],
-        "types": ["node"]
+        "noEmit": true
     },
     "include": ["src/**/*.ts"],
     "exclude": ["dist"]

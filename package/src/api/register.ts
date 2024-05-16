@@ -1,4 +1,4 @@
-import { APIRoute } from "astro";
+import { type APIRoute } from "astro";
 import { createAuthUrl } from "../urls.js";
 import config from "virtual:kinde-integration/config";
 

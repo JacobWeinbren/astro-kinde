@@ -3,6 +3,7 @@
     "version": "1.0.6",
     "description": "Astro integration module for Kinde authentication",
     "main": "index.js",
+    "type": "module",
     "author": {
         "email": "jacobweinbren@gmail.com",
         "name": "Jacob Weinbren:",
@@ -32,10 +33,9 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsup",
-        "watch": "tsup --watch"
+        "dev": "tsup --watch",
+        "build": "tsup"
     },
-    "type": "module",
     "dependencies": {
         "astro-integration-kit": "^0.13.2"
     },

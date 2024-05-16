@@ -1,4 +1,4 @@
-import { APIRoute } from "astro";
+import { type APIRoute } from "astro";
 import config from "virtual:kinde-integration/config";
 
 export const GET: APIRoute = async ({ request, redirect }) => {
