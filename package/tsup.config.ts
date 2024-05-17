@@ -14,7 +14,6 @@ export default defineConfig((options) => {
             "src/api/register.ts",
             "src/api/callback.ts",
             "src/api/signout.ts",
-            "src/api/getUser.ts",
             "src/api/isAuthenticated.ts",
         ],
         outDir: "dist",

@@ -81,7 +81,6 @@ The integration automatically injects the following routes:
 -   `/api/kinde/callback`: Handles the OAuth callback
 -   `/api/kinde/signout`: Handles user sign-out
 -   `/api/kinde/isAuthenticated`: Checks if the user is authenticated
--   `/api/kinde/getUser`: Retrieves the authenticated user's profile
 
 You can use these routes in your Astro pages to handle authentication. The main ones you will need are login/register/signout.
 
