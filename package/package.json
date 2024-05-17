@@ -1,6 +1,6 @@
 {
     "name": "astro-kinde",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "Astro integration module for Kinde authentication",
     "main": "index.js",
     "type": "module",
@@ -48,5 +48,9 @@
     },
     "prettier": {
         "tabWidth": 4
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JacobWeinbren/astro-kinde/tree/main/package"
     }
 }

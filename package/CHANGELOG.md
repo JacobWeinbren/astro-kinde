@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.2.1
+
+### Patch Changes
+
+- Added github link
+
 ## 2.2.0
 
 ### Minor Changes

@@ -38,7 +38,7 @@ export default defineConfig({
 });
 ```
 
-4. Setup your env.d.ts
+4. Setup your `env.d.ts`:
 
 ```ts
 /// <reference types="astro/client" />
