@@ -2,7 +2,7 @@
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
-This package provides an Astro integration for Kinde, simplifying the process of adding authentication to your Astro application using Kinde's OAuth 2.0 flow.
+This package provides an Astro integration for [Kinde](https://kinde.com/), simplifying the process of adding authentication to your Astro application using Kinde's OAuth 2.0 flow.
 
 ## Features
 
@@ -82,8 +82,6 @@ The integration automatically injects the following routes:
 -   `/api/kinde/signout`: Handles user sign-out
 -   `/api/kinde/isAuthenticated`: Checks if the user is authenticated
 
-You can use these routes in your Astro pages to handle authentication. The main ones you will need are login/register/signout.
-
 Authenticating Astro Pages is simple:
 
 ```astro
@@ -98,6 +96,10 @@ const isAuthenticated = Astro.locals.isAuthenticated;
   <a href="/api/kinde/register">Register</a>
 )}
 ```
+
+You can pass through query parameters to the login/register routes to control the behaviour of the Kinde flow. See what they are on the [Kinde site](https://docs.kinde.com/developer-tools/about/using-kinde-without-an-sdk/). For example:
+
+`href=/api/kinde/register?login_hint=email@gmail.com` will pre-fill the email field in the registration form with the provided email.
 
 ## Management SDK
 

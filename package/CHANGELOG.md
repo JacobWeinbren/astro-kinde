@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.3.1
+
+### Patch Changes
+
+- Improved the README and fixed the empty getUser bug
+
 ## 2.3.0
 
 ### Minor Changes

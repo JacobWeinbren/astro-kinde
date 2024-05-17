@@ -31,7 +31,6 @@ function injectRoutes(params: any, resolve: (path: string) => string) {
             pattern: "/api/kinde/isAuthenticated",
             entrypoint: "./api/isAuthenticated.js",
         },
-        { pattern: "/api/kinde/getUser", entrypoint: "./api/getUser.js" },
     ];
 
     // Loop through each route and inject it into the application
