@@ -43,14 +43,15 @@ export function createAuthUrl(config: Config): string {
 export async function makeOAuthRequest(
     url: string,
     params: URLSearchParams,
-    method: string = "POST"
+    method: string = "POST",
+    additionalOptions: RequestInit = {}
 ): Promise<any> {
     const options: RequestInit = {
         method,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        ...additionalOptions,
     };
 
-    // Include the body for methods that support it
     if (method !== "GET" && method !== "HEAD") {
         options.body = params;
     }
@@ -126,15 +127,19 @@ export async function introspectAccessToken(
     config: Config
 ): Promise<any> {
     const introspectUrl = `${config.domain}/oauth2/introspect`;
+    const credentials = `${config.clientId}:${config.clientSecret}`;
+    const basicAuth = `Basic ${btoa(credentials)}`;
     const params = new URLSearchParams({
         token: accessToken,
-        client_id: config.clientId,
+        token_type_hint: "access_token",
     });
 
-    // Append client secret if available
-    if (config.clientSecret) {
-        params.append("client_secret", config.clientSecret);
-    }
+    const options: RequestInit = {
+        headers: {
+            Authorization: basicAuth,
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    };
 
-    return makeOAuthRequest(introspectUrl, params);
+    return makeOAuthRequest(introspectUrl, params, "POST", options);
 }

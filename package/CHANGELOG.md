@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.3.2
+
+### Patch Changes
+
+- Simplified isAuthenticated code.
+
 ## 2.3.1
 
 ### Patch Changes
