@@ -31,7 +31,7 @@ npm install astro-kinde
 
 ```ts
 import { defineConfig } from "astro/config";
-import kinde from "kinde-astro";
+import kinde from "astro-kinde";
 
 export default defineConfig({
     integrations: [kinde()],
