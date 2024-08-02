@@ -67,6 +67,7 @@ kinde({
     callbackUri: "http://localhost:4321/api/kinde/callback",
     signedInUri: "http://localhost:4321",
     signedOutUri: "http://localhost:4321",
+    sessionMaxAge: 3600, // optional, number in seconds, default: 3600
 });
 ```
 

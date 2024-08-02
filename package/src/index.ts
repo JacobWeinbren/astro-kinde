@@ -13,6 +13,7 @@ const defaultConfig = {
     callbackUri: "",
     signedInUri: "",
     signedOutUri: "",
+    sessionMaxAge: "",
     responseType: "code",
     scope: "openid email profile offline",
 } satisfies Partial<Config>;
