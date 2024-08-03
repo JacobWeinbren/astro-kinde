@@ -40,7 +40,11 @@ export const GET: APIRoute = async ({ request, redirect }) => {
 
     // Set the access token in cookies and prepare the redirect response
     const headers = new Headers();
-    setAccessTokenCookie(headers, access_token);
+    setAccessTokenCookie(
+        headers,
+        access_token,
+        config.sessionMaxAge && config.sessionMaxAge
+    );
     headers.append("Location", config.signedInUri);
     return new Response(null, { status: 302, headers: headers });
 };
