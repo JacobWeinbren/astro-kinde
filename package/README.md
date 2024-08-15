@@ -21,10 +21,10 @@ KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
 KINDE_DOMAIN=your_kinde_domain
 ```
 
-2. Install the package:
+2. Install the package and it's dependencies:
 
 ```bash
-npm install astro-kinde
+npm install astro-kinde dotenv
 ```
 
 3. Add the integration to your `astro.config.mjs`:

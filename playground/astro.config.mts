@@ -9,7 +9,7 @@ import kinde from "astro-kinde";
 
 dotenv.config();
 
-// Run the Kinde initialization
+// Run the Kinde initialisation
 init();
 
 export default defineConfig({

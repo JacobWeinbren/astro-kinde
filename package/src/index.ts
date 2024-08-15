@@ -55,25 +55,21 @@ const kinde = defineIntegration({
         return {
             hooks: {
                 // Setup configuration and middleware during the Astro config phase
-                "astro:config:setup": ({ addMiddleware, ...params }) => {
-                    // Add virtual imports for configuration merging
-                    addVirtualImports(
-                        { addMiddleware, ...params },
-                        {
-                            name,
-                            imports: {
-                                "virtual:kinde-integration/config": `export default ${JSON.stringify(
-                                    { ...defaultConfig, ...options }
-                                )}`,
-                            },
-                        }
-                    );
+                "astro:config:setup": (params: any) => {
+                    addVirtualImports(params, {
+                        name,
+                        imports: {
+                            "virtual:kinde-integration/config": `export default ${JSON.stringify(
+                                { ...defaultConfig, ...options }
+                            )}`,
+                        },
+                    });
 
                     // Inject predefined routes into the application
                     injectRoutes(params, resolve);
 
                     // Add authentication middleware to the application
-                    addMiddleware({
+                    params.addMiddleware({
                         entrypoint: resolve("./authMiddleware.js"),
                         order: "pre",
                     });
