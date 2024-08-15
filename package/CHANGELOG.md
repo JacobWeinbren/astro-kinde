@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.4.1
+
+### Patch Changes
+
+- Updated README description to have clearer examples
+
 ## 2.4.0
 
 ### Minor Changes
