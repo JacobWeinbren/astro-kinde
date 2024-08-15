@@ -92,37 +92,52 @@ The integration automatically injects the following routes:
 -   `/api/kinde/signout`: Handles user sign-out
 -   `/api/kinde/isAuthenticated`: Checks if the user is authenticated
 
-Authenticating Astro Pages is simple:
+### Checking Authentication Status
+
+You can check the authentication status in two ways:
+
+1. Using `Astro.locals`:
 
 ```astro
 ---
 const isAuthenticated = Astro.locals.isAuthenticated;
+---
+```
 
-// Or you can use the isAuthenticated route
+2. Using the `isAuthenticated` route:
+
+```astro
+---
 const isAuthenticated = await fetch('/api/kinde/isAuthenticated').then(res => res.json());
+---
+```
 
-/* Redirect using Astro */
+### Redirecting Authenticated Users
+
+```astro
+---
 if (isAuthenticated) {
-  return Astro.redirect('/example');
+return Astro.redirect('/example');
 }
 ---
+```
 
-<!-- To modify page content -->
+### Conditional Rendering Based on Authentication
+
+```astro
 {isAuthenticated ? (
-    <!-- Link signs out user -->
-	<a href="/api/kinde/signout">Sign Out</a>
+    <a href="/api/kinde/signout">Sign Out</a>
 ) : (
-    <!-- Link logs in user -->
-	<a href="/api/kinde/login">Login</a>
-
-    <!-- Registration link with pre-filled email -->
-    <a href="/api/kinde/register?login_hint=user@example.com">Register</a>
+    <a href="/api/kinde/login">Login</a>
 )}
 ```
 
-You can pass through query parameters to the login/register routes to control the behaviour of the Kinde flow. See what they are on the [Kinde site](https://docs.kinde.com/developer-tools/about/using-kinde-without-an-sdk/). For example:
+### Registration with Pre-filled Email
+```astro
+<a href="/api/kinde/register?login_hint=user@example.com">Register</a>
+```
 
-`href=/api/kinde/register?login_hint=email@gmail.com` will pre-fill the email field in the registration form with the provided email.
+You can pass through query parameters to the login/register routes to control the behaviour of the Kinde flow. See what they are on the [Kinde site](https://docs.kinde.com/developer-tools/about/using-kinde-without-an-sdk/). For example:
 
 ## Management SDK
 
