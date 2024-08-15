@@ -1,5 +1,11 @@
 # astro-kinde
 
+## 2.4.0
+
+### Minor Changes
+
+- a9b0a03: Added sessionMaxAge to defaultConfig to make it possible to edit through astro config file
+
 ## 2.3.2
 
 ### Patch Changes
