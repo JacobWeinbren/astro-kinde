@@ -21,11 +21,13 @@ KINDE_MANAGEMENT_CLIENT_SECRET=your_management_client_secret
 KINDE_DOMAIN=your_kinde_domain
 ```
 
-2. Install the package and it's dependencies:
+2. Install the package and its dependencies:
 
 ```bash
 npm install astro-kinde dotenv
 ```
+
+Note: The `dotenv` module is required for loading environment variables.
 
 3. Add the integration to your `astro.config.mjs`:
 
@@ -96,18 +98,25 @@ Authenticating Astro Pages is simple:
 ---
 const isAuthenticated = Astro.locals.isAuthenticated;
 
+// Or you can use the isAuthenticated route
+const isAuthenticated = await fetch('/api/kinde/isAuthenticated').then(res => res.json());
+
 /* Redirect using Astro */
 if (isAuthenticated) {
   return Astro.redirect('/example');
 }
 ---
 
-<!-- Or just modify page content -->
+<!-- To modify page content -->
 {isAuthenticated ? (
+    <!-- Link signs out user -->
 	<a href="/api/kinde/signout">Sign Out</a>
 ) : (
+    <!-- Link logs in user -->
 	<a href="/api/kinde/login">Login</a>
-  <a href="/api/kinde/register">Register</a>
+
+    <!-- Registration link with pre-filled email -->
+    <a href="/api/kinde/register?login_hint=user@example.com">Register</a>
 )}
 ```
 
@@ -120,7 +129,7 @@ You can pass through query parameters to the login/register routes to control th
 Kinde provides a Management SDK that you can use to manage your users and applications.
 To use the Management SDK:
 
-1. If using seperately - remember to store the env variables from the previous steps.
+1. If using separately - remember to store the env variables from the previous steps.
 
 2. Install the SDK:
 
