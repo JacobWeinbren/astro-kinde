@@ -31,7 +31,7 @@ npm install astro-kinde dotenv
 
 ```ts
 import { defineConfig } from "astro/config";
-import kinde from "kinde-astro";
+import kinde from "astro-kinde";
 
 export default defineConfig({
     integrations: [kinde()],
@@ -56,17 +56,25 @@ declare namespace App {
 Configure the integration by passing options to the `kinde` function in `astro.config.mjs`.
 
 ```ts
+import { defineConfig } from "astro/config";
+import kinde from "astro-kinde";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-kinde({
-    clientId: process.env.KINDE_MANAGEMENT_CLIENT_ID,
-    clientSecret: process.env.KINDE_MANAGEMENT_CLIENT_SECRET,
-    domain: process.env.KINDE_DOMAIN,
-    callbackUri: "http://localhost:4321/api/kinde/callback",
-    signedInUri: "http://localhost:4321",
-    signedOutUri: "http://localhost:4321",
+export default defineConfig({
+    output: "server", // Necessary for Astro headers
+    integrations: [
+        kinde({
+            clientId: process.env.KINDE_MANAGEMENT_CLIENT_ID,
+            clientSecret: process.env.KINDE_MANAGEMENT_CLIENT_SECRET,
+            domain: process.env.KINDE_DOMAIN,
+            callbackUri: "http://localhost:4321/api/kinde/callback",
+            signedInUri: "http://localhost:4321",
+            signedOutUri: "http://localhost:4321",
+            sessionMaxAge: 3600,
+        }),
+    ],
 });
 ```
 
@@ -87,8 +95,14 @@ Authenticating Astro Pages is simple:
 ```astro
 ---
 const isAuthenticated = Astro.locals.isAuthenticated;
+
+/* Redirect using Astro */
+if (isAuthenticated) {
+  return Astro.redirect('/example');
+}
 ---
 
+<!-- Or just modify page content -->
 {isAuthenticated ? (
 	<a href="/api/kinde/signout">Sign Out</a>
 ) : (
